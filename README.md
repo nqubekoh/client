@@ -1,9 +1,41 @@
-# Client
+# Client – File Browser UI (Angular 20)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
+This project is a simple file browser web client built with Angular 20.  
+It communicates with a backend API to list directory contents, paginate through results, and navigate into subdirectories.
 
-## Development server
+---
 
+## Features
+
+- Browse files and directories starting from a given path
+- Navigate into subdirectories
+- View file metadata (size, created date, permissions, etc.)
+- Incremental loading with a _Load more_ button (cursor-based pagination)
+- Standalone Angular root component (no traditional `AppModule` bootstrapping)
+- Styled using Bootstrap 5
+
+---
+
+## Tech Stack
+
+- **Framework:** Angular 20
+- **Language:** TypeScript
+- **UI:** Bootstrap 5
+- **Build Tooling:** Angular CLI
+- **Testing:** Karma + Jasmine
+- **Containerization:** Docker + Nginx
+
+---
+
+## Prerequisites
+
+- **Node.js**: 18+ (LTS recommended)
+- **npm**: 8+  
+- (Optional) **Angular CLI** installed globally:
+
+## Getting Started
+
+Install dependencies:
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding

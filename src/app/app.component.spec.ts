@@ -15,8 +15,8 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      imports: [FormsModule],
+      // Standalone component goes into imports, not declarations
+      imports: [AppComponent, FormsModule],
       providers: [{ provide: FileService, useClass: MockFileService }],
     }).compileComponents();
 
