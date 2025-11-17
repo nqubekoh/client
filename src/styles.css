@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+
+/* Mobile file-card tweaks */
+.file-card {
+  background-color: #ffffff;
+}
+
+.file-card-clickable {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .file-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+}

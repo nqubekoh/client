@@ -6,38 +6,80 @@
     <input class="form-control" [(ngModel)]="currentPath" (keyup.enter)="load()" />
   </div>
 
-  <div class="table-responsive">
+  <!-- Desktop / tablet: table view -->
+  <div class="table-responsive d-none d-md-block">
     <table class="table table-striped table-hover align-middle">
       <thead class="table-light">
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Extension</th>
-        <th>Full path</th>
-        <th class="text-end">Size (bytes)</th>
-        <th>Date Created</th>
-        <th>Permissions</th>
-      </tr>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Extension</th>
+          <th>Full path</th>
+          <th class="text-end">Size (bytes)</th>
+          <th>Date Created</th>
+          <th>Permissions</th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let e of entries">
-        <td>
-          <a *ngIf="e.isDirectory"
-             href="#"
-             (click)="enter(e); $event.preventDefault()">
-            {{ e.name }}
-          </a>
-          <span *ngIf="!e.isDirectory">{{ e.name }}</span>
-        </td>
-        <td>{{ e.isDirectory ? 'Directory' : 'File' }}</td>
-        <td>{{ e.extension || '-' }}</td>
-        <td><small class="text-muted">{{ e.path }}</small></td>
-        <td class="text-end">{{ e.size | number }}</td>
-        <td>{{ e.createdAt | date:'short' }}</td>
-        <td>{{ e.permissions }}</td>
-      </tr>
+        <tr *ngFor="let e of entries">
+          <td>
+            <a
+              *ngIf="e.isDirectory"
+              href="#"
+              (click)="enter(e); $event.preventDefault()"
+            >
+              {{ e.name }}
+            </a>
+            <span *ngIf="!e.isDirectory">{{ e.name }}</span>
+          </td>
+          <td>{{ e.isDirectory ? 'Directory' : 'File' }}</td>
+          <td>{{ e.extension || '-' }}</td>
+          <td><small class="text-muted">{{ e.path }}</small></td>
+          <td class="text-end">{{ e.size | number }}</td>
+          <td>{{ e.createdAt | date: 'short' }}</td>
+          <td>{{ e.permissions }}</td>
+        </tr>
       </tbody>
     </table>
+  </div>
+
+  <!-- Mobile: card list view -->
+  <div class="d-block d-md-none">
+    <div
+      *ngFor="let e of entries"
+      class="file-card mb-2 p-2 border rounded"
+      (click)="e.isDirectory && enter(e)"
+      [class.file-card-clickable]="e.isDirectory"
+    >
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ e.name }}</strong>
+          <span class="badge bg-secondary ms-2">
+            {{ e.isDirectory ? 'Dir' : (e.extension || 'File') }}
+          </span>
+        </div>
+        <div class="text-end small text-muted" *ngIf="e.size">
+          {{ e.size | number }} bytes
+        </div>
+      </div>
+
+      <div class="small text-muted mt-1">
+        <div *ngIf="e.path">{{ e.path }}</div>
+        <div *ngIf="e.createdAt">
+          {{ e.createdAt | date: 'short' }}
+        </div>
+        <div *ngIf="e.permissions">
+          {{ e.permissions }}
+        </div>
+      </div>
+
+      <div
+        class="mt-2 text-primary small"
+        *ngIf="e.isDirectory"
+      >
+        Tap to open
+      </div>
+    </div>
   </div>
 
   <div class="text-center my-3" *ngIf="nextCursor">
