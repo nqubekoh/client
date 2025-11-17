@@ -1,9 +1,8 @@
 table td,
 table th {
-  padding-right: 3rem; /* increased from 2rem */
+  padding-right: 3rem;
 }
 
-/* optional: a bit of left padding too */
 table td:first-child,
 table th:first-child {
   padding-left: 10rem;
